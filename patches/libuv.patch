@@ -1,0 +1,19 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 28c6df25..da5d2dd0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -759,12 +759,12 @@ set(UV_VERSION_MAJOR "${CMAKE_MATCH_1}")
+ set(includedir ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR})
+ set(libdir ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
+ set(prefix ${CMAKE_INSTALL_PREFIX})
+-configure_file(libuv-static.pc.in libuv-static.pc @ONLY)
++configure_file(libuv.pc.in libuv.pc @ONLY)
+ 
+ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+ install(FILES LICENSE DESTINATION ${CMAKE_INSTALL_DOCDIR})
+ install(FILES LICENSE-extra DESTINATION ${CMAKE_INSTALL_DOCDIR})
+-install(FILES ${PROJECT_BINARY_DIR}/libuv-static.pc
++install(FILES ${PROJECT_BINARY_DIR}/libuv.pc
+         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+ install(TARGETS uv_a EXPORT libuvConfig
+         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
