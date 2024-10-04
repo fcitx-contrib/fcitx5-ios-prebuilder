@@ -1,3 +1,5 @@
 from common import Builder
 
-Builder('marisa', dep=True).exec()
+Builder('marisa', [
+    '-DBUILD_TOOLS=OFF'
+],dep=True).exec()
