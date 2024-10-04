@@ -31,8 +31,10 @@ jobs:
           IOS_PLATFORM: ${{ matrix.platform }}
         run: |
           python scripts/fmt.py
+          python scripts/json-c.py
           python scripts/libintl.py
           python scripts/libuv.py
+          python scripts/marisa.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
