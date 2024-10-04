@@ -2,6 +2,7 @@ import os
 import platform
 
 INSTALL_PREFIX = '/usr'
+IOS_VERSION = 15
 
 
 def ensure(program: str, args: list[str]):
@@ -45,6 +46,7 @@ class Builder:
             '-DBUILD_SHARED_LIBS=OFF',
             f'-DCMAKE_INSTALL_PREFIX={INSTALL_PREFIX}',
             f'-DCMAKE_FIND_ROOT_PATH={self.root}/build/sysroot/usr',
+            f'-DCMAKE_OSX_DEPLOYMENT_TARGET={IOS_VERSION}',
             *self.options
         ])
 

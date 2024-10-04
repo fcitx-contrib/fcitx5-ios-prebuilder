@@ -7,3 +7,9 @@
 [submodule "fmt"]
 	path = fmt
 	url = https://github.com/fmtlib/fmt
+[submodule "marisa"]
+	path = marisa
+	url = https://github.com/rime/marisa-trie
+[submodule "json-c"]
+	path = json-c
+	url = https://github.com/json-c/json-c
