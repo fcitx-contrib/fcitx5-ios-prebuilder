@@ -13,3 +13,6 @@
 [submodule "json-c"]
 	path = json-c
 	url = https://github.com/json-c/json-c
+[submodule "yaml-cpp"]
+	path = yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp
