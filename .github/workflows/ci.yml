@@ -32,6 +32,7 @@ jobs:
         run: |
           python scripts/boost.py
           python scripts/fmt.py
+          python scripts/glog.py
           python scripts/json-c.py
           python scripts/leveldb.py
           python scripts/libintl.py
