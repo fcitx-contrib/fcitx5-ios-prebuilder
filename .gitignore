@@ -1,3 +1,5 @@
 .DS_Store
 build
 *.pyc
+boost-*
+*.tar.bz2

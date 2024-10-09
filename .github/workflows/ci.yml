@@ -30,11 +30,17 @@ jobs:
         env:
           IOS_PLATFORM: ${{ matrix.platform }}
         run: |
+          python scripts/boost.py
           python scripts/fmt.py
+          python scripts/glog.py
           python scripts/json-c.py
+          python scripts/leveldb.py
           python scripts/libintl.py
           python scripts/libuv.py
           python scripts/marisa.py
+          python scripts/opencc.py
+          python scripts/yaml-cpp.py
+          python scripts/librime.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

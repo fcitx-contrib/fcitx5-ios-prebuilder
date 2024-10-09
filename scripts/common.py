@@ -4,6 +4,7 @@ import platform
 INSTALL_PREFIX = '/usr'
 IOS_VERSION = 15
 
+POSTFIX = '-' + platform.machine() if os.environ['IOS_PLATFORM'] == 'SIMULATOR' else ''
 
 def ensure(program: str, args: list[str]):
     command = " ".join([program, *args])
@@ -26,6 +27,19 @@ def patch(project: str, src: str | None = None, dst: str | None = None):
         ])
 
 
+def cache(url: str):
+    file = url[url.rindex('/') + 1:]
+    path = f'cache/{file}'
+    if os.path.isfile(path):
+        print(f'Using cached {file}')
+        return
+    ensure('wget', [
+        '-P',
+        'cache',
+        url
+    ])
+
+
 class Builder:
     def __init__(self, name: str, options: list[str] | None=None, src='.', build='build', dep=False):
         self.name = name
@@ -34,6 +48,7 @@ class Builder:
         self.options = options or []
         self.src = src
         self.build_ = build
+        self.dep = dep
 
     def configure(self):
         os.environ['PKG_CONFIG_PATH'] = f'{self.root}/build/sysroot/usr/lib/pkgconfig'
@@ -59,10 +74,18 @@ class Builder:
 
     def package(self):
         os.chdir(f'{self.destdir}{INSTALL_PREFIX}')
-        ensure('tar', ['cjvf', f'{self.destdir}{"-" + platform.machine() if os.environ["IOS_PLATFORM"] == "SIMULATOR" else ""}.tar.bz2', '*'])
+        ensure('tar', ['cjvf', f'{self.destdir}{POSTFIX}.tar.bz2', '*'])
+
+    def extract(self):
+        directory = 'build/sysroot/usr'
+        os.chdir(self.root)
+        ensure('mkdir', ['-p', directory])
+        ensure('tar', ['xjvf', f'{self.destdir}{POSTFIX}.tar.bz2', '-C', directory])
 
     def exec(self):
         self.configure()
         self.build()
         self.install()
         self.package()
+        if self.dep:
+            self.extract()
