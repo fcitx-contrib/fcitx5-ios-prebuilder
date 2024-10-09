@@ -4,6 +4,7 @@ import platform
 INSTALL_PREFIX = '/usr'
 IOS_VERSION = 15
 
+POSTFIX = '-' + platform.machine() if os.environ['IOS_PLATFORM'] == 'SIMULATOR' else ''
 
 def ensure(program: str, args: list[str]):
     command = " ".join([program, *args])
@@ -24,6 +25,19 @@ def patch(project: str, src: str | None = None, dst: str | None = None):
             f'--directory={project}',
             f'patches/{project}.patch'
         ])
+
+
+def cache(url: str):
+    file = url[url.rindex('/') + 1:]
+    path = f'cache/{file}'
+    if os.path.isfile(path):
+        print(f'Using cached {file}')
+        return
+    ensure('wget', [
+        '-P',
+        'cache',
+        url
+    ])
 
 
 class Builder:
@@ -59,7 +73,7 @@ class Builder:
 
     def package(self):
         os.chdir(f'{self.destdir}{INSTALL_PREFIX}')
-        ensure('tar', ['cjvf', f'{self.destdir}{"-" + platform.machine() if os.environ["IOS_PLATFORM"] == "SIMULATOR" else ""}.tar.bz2', '*'])
+        ensure('tar', ['cjvf', f'{self.destdir}{POSTFIX}.tar.bz2', '*'])
 
     def exec(self):
         self.configure()

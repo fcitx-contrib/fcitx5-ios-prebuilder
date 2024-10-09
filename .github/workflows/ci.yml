@@ -30,6 +30,7 @@ jobs:
         env:
           IOS_PLATFORM: ${{ matrix.platform }}
         run: |
+          python scripts/boost.py
           python scripts/fmt.py
           python scripts/json-c.py
           python scripts/libintl.py
