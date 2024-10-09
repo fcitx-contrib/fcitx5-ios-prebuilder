@@ -1,0 +1,32 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1d8c8e6..2344b74 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -152,6 +152,8 @@ add_definitions(
+   -DPACKAGE_NAME="${PACKAGE_NAME}"
+ )
+ 
++add_compile_options(-I "${CMAKE_CURRENT_SOURCE_DIR}/../build/sysroot/usr/include")
++
+ if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+   add_definitions(
+     -std=c++14
+@@ -221,9 +223,6 @@ endif()
+ ######## Subdirectories
+ 
+ add_subdirectory(src)
+-add_subdirectory(doc)
+-add_subdirectory(data)
+-add_subdirectory(test)
+ 
+ ######## Testing
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 7768c89..f8e8775 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -205,4 +205,3 @@ endif()
+ 
+ # Subdir
+ 
+-add_subdirectory(tools)

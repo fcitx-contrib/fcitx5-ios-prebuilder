@@ -48,6 +48,7 @@ class Builder:
         self.options = options or []
         self.src = src
         self.build_ = build
+        self.dep = dep
 
     def configure(self):
         os.environ['PKG_CONFIG_PATH'] = f'{self.root}/build/sysroot/usr/lib/pkgconfig'
@@ -75,8 +76,16 @@ class Builder:
         os.chdir(f'{self.destdir}{INSTALL_PREFIX}')
         ensure('tar', ['cjvf', f'{self.destdir}{POSTFIX}.tar.bz2', '*'])
 
+    def extract(self):
+        directory = 'build/sysroot/usr'
+        os.chdir(self.root)
+        ensure('mkdir', ['-p', directory])
+        ensure('tar', ['xjvf', f'{self.destdir}{POSTFIX}.tar.bz2', '-C', directory])
+
     def exec(self):
         self.configure()
         self.build()
         self.install()
         self.package()
+        if self.dep:
+            self.extract()

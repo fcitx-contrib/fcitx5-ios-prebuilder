@@ -2,3 +2,4 @@
 build
 *.pyc
 boost-*
+*.tar.bz2

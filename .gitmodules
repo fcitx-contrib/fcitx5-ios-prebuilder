@@ -19,3 +19,6 @@
 [submodule "leveldb"]
 	path = leveldb
 	url = https://github.com/google/leveldb
+[submodule "opencc"]
+	path = opencc
+	url = https://github.com/BYVoid/OpenCC

@@ -37,6 +37,7 @@ jobs:
           python scripts/libintl.py
           python scripts/libuv.py
           python scripts/marisa.py
+          python scripts/opencc.py
           python scripts/yaml-cpp.py
 
       - name: Upload artifact
