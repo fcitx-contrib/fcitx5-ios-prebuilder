@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: macos-14, platform: OS }
-          - { os: macos-14, platform: SIMULATOR }
+          - { os: macos-15, platform: OS }
+          - { os: macos-15, platform: SIMULATOR }
           - { os: macos-13, platform: SIMULATOR }
 
     steps:
