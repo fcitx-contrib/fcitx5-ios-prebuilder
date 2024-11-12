@@ -56,7 +56,7 @@ class Builder:
         ensure('cmake', [
             '-B', self.build_, '-G', 'Xcode',
             '-S', self.src,
-            '-DCMAKE_TOOLCHAIN_FILE=../ios.cmake',
+            f'-DCMAKE_TOOLCHAIN_FILE={self.root}/ios.cmake',
             f'-DIOS_PLATFORM={os.environ["IOS_PLATFORM"]}',
             '-DBUILD_SHARED_LIBS=OFF',
             f'-DCMAKE_INSTALL_PREFIX={INSTALL_PREFIX}',

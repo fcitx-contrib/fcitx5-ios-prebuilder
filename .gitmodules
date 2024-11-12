@@ -28,3 +28,6 @@
 [submodule "librime"]
 	path = librime
 	url = https://github.com/rime/librime
+[submodule "zstd"]
+	path = zstd
+	url = https://github.com/facebook/zstd
