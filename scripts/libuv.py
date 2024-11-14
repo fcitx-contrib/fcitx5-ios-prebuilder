@@ -1,10 +1,6 @@
-from common import Builder, patch
+from common import Builder
 
-project = 'libuv'
-
-patch(project)
-
-Builder(project, [
+Builder('libuv', [
     '-DLIBUV_BUILD_SHARED=OFF',
     '-DLIBUV_BUILD_TESTS=OFF'
 ]).exec()
